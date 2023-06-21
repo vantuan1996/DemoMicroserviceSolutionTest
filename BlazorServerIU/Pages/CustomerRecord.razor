@@ -1,0 +1,37 @@
+﻿@inject HttpClient httpClient
+@using BlazorServerIU.Models
+
+@if (!isEditMode)
+{
+    <tr>
+        <td>@Customer.Name</td>
+        <td>@Customer.Mobile</td>
+        <td>@Customer.Email</td>
+        <td><a @onclick="() =>{ isEditMode = true; }" href="javascript:void(0)"><i class="oi oi-pencil"></i></a></td>
+        <td><a @onclick="async () => await DeleteCustomer.InvokeAsync(Customer.Id)" href="javascript:void(0)"><i class="oi oi-trash"></i></a></td>
+    </tr>
+}
+else
+{
+    <tr>
+        <td><input class="form-control" @bind="Customer.Name" placeholder="Name" /></td>
+        <td><input class="form-control" @bind="Customer.Mobile" placeholder="Mobile" /></td>
+        <td><input class="form-control" @bind="Customer.Email" placeholder="Email" /></td>
+        <td class="pt-3"><a @onclick="async () => {await UpdateCustomer.InvokeAsync(Customer);isEditMode = false;}" href="javascript:void(0)"><i class="oi oi-task"></i></a></td>
+        <td></td>
+    </tr>
+}
+@code {
+    private bool isEditMode = false;
+
+    [Parameter]
+    public CustomerViewModel Customer { get; set; }
+
+    [Parameter]
+    public EventCallback<CustomerViewModel>
+    UpdateCustomer { get; set; }
+
+    [Parameter]
+    public EventCallback<int>
+        DeleteCustomer { get; set; }
+        }

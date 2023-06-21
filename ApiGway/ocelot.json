@@ -1,0 +1,102 @@
+//{
+//  "Routes": [
+//    {
+//      //"DownstreamPathTemplate": "/api/Customer",
+//      //"DownstreamScheme": "http",
+//      //"DownstreamHostAndPorts": [
+//      //  {
+//      //    "Host": "localhost",
+//      //    "Port": 52968
+//      //    //52968
+//      //  }
+//      //],
+//      //"UpstreamPathTemplate": "/api/Customer",
+//      //"UpstreamHttpMethod": [ "GET", "Put", "Post" ]
+//      "UpstreamPathTemplate": "/api/Customer",
+//      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "customerwebapi",
+//          "Port": 80
+//        }
+//      ],
+//      "DownstreamPathTemplate": "/api/Customer"
+//    }
+//  ]
+ 
+//}
+
+{
+  "Routes": [
+    // Customer Web API
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "CustomerService",
+      "DownstreamPathTemplate": "/api/customer",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/customer",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post" ],
+      "UpstreamScheme": "http"
+    },
+
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "CustomerService",
+      "DownstreamPathTemplate": "/api/customer/{customerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/customer/{customerId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamScheme": "http"
+    },
+
+    //Order Web API
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "OrderService",
+      "DownstreamPathTemplate": "/api/order",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/order",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "OrderService",
+      "DownstreamPathTemplate": "/api/order/{orderId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/order/{orderId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamScheme": "http"
+    },
+
+    //Product Web API
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "ProductService",
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/product",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "ProductService",
+      "DownstreamPathTemplate": "/api/product/{productId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/product/{orderId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamScheme": "http"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5085",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+
+    }
+  }
+}

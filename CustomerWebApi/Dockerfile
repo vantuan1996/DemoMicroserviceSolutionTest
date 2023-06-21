@@ -7,6 +7,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["CustomerWebApi/CustomerWebApi.csproj", "CustomerWebApi/"]
+COPY ["Common/Common.csproj", "Common/"]
+COPY ["ProductWebApi/ProductWebApi.csproj", "ProductWebApi/"]
+COPY ["ApiGway/ApiGway.csproj", "ApiGway/"]
 RUN dotnet restore "CustomerWebApi/CustomerWebApi.csproj"
 COPY . .
 WORKDIR "/src/CustomerWebApi"
@@ -19,4 +22,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CustomerWebApi.dll"]
-

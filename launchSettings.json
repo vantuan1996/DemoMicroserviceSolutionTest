@@ -4,7 +4,12 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "customerwebapi": "StartDebugging"
+        "customerwebapi": "StartDebugging",
+        "apigway": "StartDebugging",
+        "productwebapi": "StartDebugging",
+        "webapplication1": "StartDebugging",
+        "orderwebapi": "StartDebugging",
+        "blazorserveriu": "StartDebugging"
       }
     }
   }

@@ -13,9 +13,6 @@ namespace CustomerWebApi.Models
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("CustomerName")]
-        public int CustomerName { get; set; }
-
         [Column("Name")]
         public string? Name { get; set; }
 
@@ -23,6 +20,6 @@ namespace CustomerWebApi.Models
         public int Mobile { get; set; }
 
         [Column("Email")]
-        public int Email { get; set; }
+        public string Email { get; set; }
     }
 }
